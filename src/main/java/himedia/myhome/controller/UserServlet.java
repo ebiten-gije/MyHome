@@ -28,7 +28,7 @@ public class UserServlet extends BaseServlet {
 			rd.forward(req, resp);
 		} else {
 			//	홈페이지로 리다이렉트
-			resp.sendRedirect(req.getContextPath() + "/");
+			resp.sendRedirect(req.getContextPath());
 		}
 	}
 
