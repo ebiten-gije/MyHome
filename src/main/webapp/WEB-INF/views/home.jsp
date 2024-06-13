@@ -12,24 +12,26 @@
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <h1>My Homepage</h1>
-    </div> <!-- /header -->
-    <div id="navigation">
-      <ul>
-        <li><a href="<%= request.getContextPath() %>/">My Home</a></li>
-        <li><a href="<%= request.getContextPath() %>/guestbook">방명록</a></li>
-        <li><a href="<%= request.getContextPath() %>/board">게시판</a></li>
-      </ul>
-	</div>
+  
+    <!-- header include -->
+    <jsp:include page="/WEB-INF/views/includes/header.jsp">
+    	<jsp:param name="param1" value="value1" />
+    	<jsp:param name="param2" value="value2" />
+    </jsp:include>
+
+	<!-- navigation include -->
+	<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
+    
 	<div id="wrapper">
       <div id="content">
 			<!-- Content 영역 -->
       </div>
 	</div>
-	<div id="footer">
-      <p>Copyright(c) 2019 남승균 All rights reserved. </p>
-	</div>
+	
+	<!-- footer include -->
+	<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+	
+	
   </div>
 </body>
 </html>
