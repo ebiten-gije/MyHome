@@ -6,11 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>My Home: Join Form</title>
+<link type="text/css"
+	rel="stylesheet"
+	href="<%= request.getContextPath() %>/css/users.css" />
 </head>
 <body>
 	<h1>Join Form</h1>
 	
-	<form method="POST" action="">
+	<form method="POST" action="<%= request.getContextPath() %>/users">
 		<input type="hidden" name="a" value="join" />
 		<label for="name">이름</label>
 		<input type="text" name="name" id="name" /><br/>
@@ -24,5 +27,6 @@
 		<input type="submit" value="가입" />
 		
 	</form>
+	<!-- TODO: 폼 검증(Validation) -->
 </body>
 </html>
