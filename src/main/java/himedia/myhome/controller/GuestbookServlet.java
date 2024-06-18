@@ -54,7 +54,7 @@ public class GuestbookServlet extends BaseServlet {
 			boolean success = dao.add(vo);
 			
 			if(success){
-				resp.sendRedirect(req.getContextPath() + "/geustbook");
+				resp.sendRedirect(req.getContextPath() + "/guestbook");
 			}
 		
 		} else if ("delete".equals(actionName)) {

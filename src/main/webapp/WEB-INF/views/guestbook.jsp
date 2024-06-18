@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,31 +10,25 @@
 <title>My Homepage</title>
 <link type="text/css" 
 	rel="stylesheet" 
-	href="<%= request.getContextPath() %>/css/guestbook.css"/>
+	href="<c:url value="/css/guestbook.css"/>">
 </head>
-<%
-List <GuestbookVo> list = null;
-if(request.getAttribute("list") instanceof List){
-	list = (List<GuestbookVo>)request.getAttribute("list");	
-}
 
-%>
 <body>
   <div id="container">
   
     <!-- header include -->
-    <jsp:include page="/WEB-INF/views/includes/header.jsp">
-    	<jsp:param name="param1" value="value1" />
-    	<jsp:param name="param2" value="value2" />
-    </jsp:include>
+    <c:import url="/WEB-INF/views/includes/header.jsp">
+    	<c:param name="param1" value="param1"/>
+    	<c:param name="param2" value="param2"/>
+    </c:import>
 
 	<!-- navigation include -->
-	<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
+	<c:import url="/WEB-INF/views/includes/navigation.jsp" />
     
 	<div id="wrapper">
       <div id="content">
 			<!-- Content 영역 -->
-			<form action="<%=request.getContextPath()%>/guestbook" method="POST">
+			<form action="<c:url value = "/guestbook"/>" method="POST">
 			<input type="hidden" name="a" value="add"/>
 			<table border=1 width=500>
 				<tr>
@@ -50,30 +45,26 @@ if(request.getAttribute("list") instanceof List){
 			</form>
 			<br/>
 
-			<%
-			for (GuestbookVo vo : list){
-			%>
+			<c:forEach items= "${list }" var="vo" varStatus="status">
 			<table width=510 border=1>
 				<tr>
-					<td><%=vo.getNo()%></td>
-					<td><%=vo.getName()%></td>
-					<td><%=vo.getDate()%></td>
-					<td><a href="<%=request.getContextPath()%>/guestbook?a=passconfirm&no=<%=vo.getNo()%>">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/guestbook?a=deleteform&no=<%=vo.getNo()%>">삭제</a></td>
+					<td>${vo.no }</td>
+					<td>${vo.name}</td>
+					<td>${vo.date}</td>
+					<td><a href="<c:url value="/guestbook?a=passconfirm&no=${vo.no }"/>">수정</a></td>
+					<td><a href="<c:url value="/guestbook?a=deleteform&no=${vo.no }"/>">삭제</a></td>
 				</tr>
 				<tr>
-					<td colspan=5><%=vo.getContent()%></td>
+					<td colspan=5>${vo.content}</td>
 				</tr>
 			</table>
+			</c:forEach>
         	<br/>
-			<%
-			}
-			%>
       </div>
 	</div>
 	
 	<!-- footer include -->
-	<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+	<c:import url="/WEB-INF/views/includes/footer.jsp"/>
 	
 	
   </div>
